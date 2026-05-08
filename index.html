@@ -103,7 +103,7 @@
     }
 
     /* =========================================
-       3. ヒーローセクション（絶対固定・編集禁止）
+       3. ヒーローセクション（回転部分の修正）
        ========================================= */
     .hero {
       display: flex;
@@ -133,6 +133,7 @@
       line-height: 1;
     }
 
+    /* 外側の円（時計回り） */
     .organic-circle {
       position: absolute;
       z-index: 1;
@@ -141,13 +142,33 @@
       border: 2px dashed #d32f2f;
       border-radius: 50%;
       opacity: 0.3;
-      animation: smooth-rotate 20s linear infinite;
-      transform-origin: 49% 51%;
+      animation: smooth-rotate 25s linear infinite;
+      transform-origin: center; /* ブレ防止 */
+      box-sizing: border-box;
+    }
+
+    /* 内側の円（反時計回り・小さ目・濃いめ） */
+    .organic-circle-inner {
+      position: absolute;
+      z-index: 1;
+      top: 15%; left: 15%; /* 中央配置用の調整 */
+      width: 70%; height: 70%;
+      border: 2px dashed #d32f2f;
+      border-radius: 50%;
+      opacity: 0.4;
+      animation: smooth-rotate-reverse 18s linear infinite;
+      transform-origin: center; /* ブレ防止 */
+      box-sizing: border-box;
     }
 
     @keyframes smooth-rotate {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
+    }
+
+    @keyframes smooth-rotate-reverse {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
     }
 
     .date {
@@ -324,6 +345,7 @@
 <div class="hero">
   <div class="hero-title-container">
     <div class="organic-circle"></div>
+    <div class="organic-circle-inner"></div>
     <h1 class="hero-title">KORYO FES</h1>
   </div>
   
